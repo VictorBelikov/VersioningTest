@@ -1,0 +1,13 @@
+{
+  "name": "versioningtest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictorBelikov/VersioningTest.git"
+  },
+  "author": "V1ctoR"
+}
