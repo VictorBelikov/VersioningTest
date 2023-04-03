@@ -21,6 +21,6 @@ jobs:
           npm version patch -m "[INCREASE APP VERSION] %s"
       - name: Push changes
         if: ${{ github.event_name == 'push' }}
-        uses: ad-m/github-push-action@main
+        uses: ad-m/github-push-action@master
         with:
           branch: ${{ github.head_ref }}
