@@ -11,14 +11,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
+          ref: ${{ github.head_ref }}
           fetch-depth: 0
       - name: Commit patched app version
+        if: ${{ github.event_name == 'push' }}
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
           npm version patch -m "[INCREASE APP VERSION] %s"
       - name: Push changes
-        uses: CasperWA/push-protected@v2
+        if: ${{ github.event_name == 'push' }}
+        uses: ad-m/github-push-action@master
         with:
-          token: ${{ secrets.ADMIN_ACCESS }}
-          branch: main
+          github_token: ${{ secrets.ADMIN_ACCESS }}
+          branch: ${{ github.head_ref }}
