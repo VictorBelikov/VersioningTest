@@ -10,9 +10,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
       - name: Commit patched app version
         run: |
           git config user.name github-actions[bot]
