@@ -4,13 +4,10 @@ on:
   push:
     branches: ['main']
 
-jobs:
-  patch-version:
-    runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
         with:
+          ref: ${{ github.head_ref }}
           fetch-depth: 0
       - name: Commit patched app version
         if: ${{ github.event_name == 'push' }}
@@ -18,4 +15,8 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
           npm version patch -m "[INCREASE APP VERSION] %s"
-          git push
+      - name: Push changes
+        if: ${{ github.event_name == 'push' }}
+        uses: ad-m/github-push-action@main
+        with:
+          branch: ${{ github.head_ref }}
