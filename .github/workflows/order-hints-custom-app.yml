@@ -12,16 +12,16 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          persist-credentials: false
+          persist-credentials: true
       - name: Commit patch version
         if: ${{ github.event_name == 'push' }}
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
-          npm version patch -m "[INCREASE APP VERSION] %s"
+          npm version patch -m "[skip ci][INCREASE APP VERSION] %s"
       - name: Push changes
         if: ${{ github.event_name == 'push' }}
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.ADMIN_ACCESS }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
