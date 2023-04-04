@@ -13,7 +13,6 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-          ref: ${{ github.head_ref }}
       - name: Commit patch version
         if: ${{ github.event_name == 'push' }}
         run: |
@@ -25,4 +24,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.ADMIN_ACCESS }}
-          force_with_lease: true
+          branch: ${{ github.ref }}
