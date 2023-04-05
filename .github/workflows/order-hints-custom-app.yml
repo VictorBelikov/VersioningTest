@@ -7,6 +7,9 @@ on:
 jobs:
   patch-version:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v3
@@ -23,5 +26,5 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.ADMIN_ACCESS }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
