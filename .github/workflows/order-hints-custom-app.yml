@@ -18,7 +18,7 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
-          npm version patch -m "${{ github.job }} [INCREASE APP VERSION] %s"
+          npm version patch -m "${{ github.run_id github.run_number github.run_attempt }} [INCREASE APP VERSION] %s"
       - name: Push changes
         if: ${{ github.event_name == 'push' }}
         uses: ad-m/github-push-action@master
